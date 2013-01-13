@@ -1,3 +1,3 @@
-#1 Talk.io
+# Talk.io
 
-Video conferencing web application written using node.js and webrtc.
+Video conferencing web application written using Node.js and WebRTC.
