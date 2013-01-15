@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "locomotive": "0.3.x",
-    "express": "3.x.x",
     "connect-powered-by": "0.1.x",
+    "express": "3.x.x",
     "jade": "0.28.x",
+    "locomotive": "0.3.x",
     "passport": "0.1.x",
-    "twitter-bootstrap": "2.1.x",
     "socket.io": "0.9.x",
-    "stack-angular": "0.0.x"
+    "stack-angular": "0.0.x",
+    "twitter-bootstrap": "2.1.x"
   }
 }
