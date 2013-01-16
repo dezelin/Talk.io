@@ -6,7 +6,6 @@
     "connect-powered-by": "0.1.x",
     "connect-redis": "1.4.x",
     "express": "3.x.x",
-    "hiredis": "0.1.x",
     "jade": "0.28.x",
     "locomotive": "0.3.x",
     "locomotive-mongoose": "0.1.x",
