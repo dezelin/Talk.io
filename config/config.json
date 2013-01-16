@@ -1,3 +1,3 @@
 {
-  sessionSecret: 'default secret'
+  "sessionSecret": "default secret"
 }
