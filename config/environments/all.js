@@ -1,5 +1,7 @@
 var express = require('express')
   , poweredBy = require('connect-powered-by')
+  , passport = require('passport')
+  , RedisStore = require('connect-redis')(express)
   , util = require('util');
 
 module.exports = function () {
@@ -45,5 +47,12 @@ module.exports = function () {
   this.use(express.static(__dirname + '/../../public'));
   this.use(express.bodyParser());
   this.use(express.methodOverride());
+  this.use(express.cookieParser());
+  this.use(express.session({
+    secret: this.config.sessionSecret,
+    store: new RedisStore(this.config.redisSessionStoreOptions)
+  }));
+  this.use(passport.initialize());
+  this.use(passport.session());
   this.use(this.router);
 }
