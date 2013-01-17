@@ -1,6 +1,6 @@
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
-  , RedisStore = require('connect-redis');
+  , Account = require('../../app/models/account');
 
 module.exports = function () {
   // Any files in this directory will be `require()`'ed when the application
@@ -22,9 +22,9 @@ module.exports = function () {
       // Find the user by username.  If there is no user with the given
       // username, or the password is not correct, set the user to `false` to
       // indicate failure.  Otherwise, return the authenticated `user`.
-      //Account.authenticate(email, password, function(err, user) {
-      //  return done(err, user);
-      //});
+      Account.authenticate(email, password, function(err, user) {
+        return done(err, user);
+      });
 
       return done(null, null);
     }
@@ -37,9 +37,9 @@ module.exports = function () {
   });
 
   passport.deserializeUser(function (id, done) {
-    //Account.findById(id, function (err, user) {
-    //  done(err, user);
-    //});
+    Account.findById(id, function (err, user) {
+      done(err, user);
+    });
 
     return done(null, null);
   });

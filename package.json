@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bcrypt": "0.7.x",
+    "connect-mongodb": "1.1.x",
     "connect-powered-by": "0.1.x",
     "connect-redis": "1.4.x",
     "express": "3.x.x",
@@ -10,6 +12,7 @@
     "locomotive": "0.3.x",
     "locomotive-mongoose": "0.1.x",
     "mongoose": "3.5.x",
+    "mongoose-types": "1.0.x",
     "passport": "0.1.x",
     "passport-local": "0.1.x",
     "redis": "0.8.x",

@@ -1,11 +1,19 @@
 {
   "sessionSecret": "default secret",
-  "redisSessionStoreOptions": {
-    "db": "talk_io_session",
-    "host": "localhost",
+  "redisOptions": {
+    "db": "talk_io",
+    "hostname": "localhost",
     "port": 6379,
-    "ttl": null,
-    "prefix": "sess:",
+    "ttl": "360",
+    "prefix": "cache:",
+    "username": "talk",
     "password": "default redis password"
+  },
+  "mongooseOptions": {
+    "db": "talk_io",
+    "hostname": "localhost",
+    "port": "27017",
+    "username": "talk",
+    "password": "default mongoose password"
   }
 }

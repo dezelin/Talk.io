@@ -1,7 +1,9 @@
 var express = require('express')
   , poweredBy = require('connect-powered-by')
   , passport = require('passport')
-  , RedisStore = require('connect-redis')(express)
+  , mongoose = require('mongoose')
+  , mongooseDataStore = require('locomotive-mongoose')
+  , mongoStore = require('connect-mongodb')
   , util = require('util');
 
 module.exports = function () {
@@ -50,9 +52,11 @@ module.exports = function () {
   this.use(express.cookieParser());
   this.use(express.session({
     secret: this.config.sessionSecret,
-    store: new RedisStore(this.config.redisSessionStoreOptions)
+    store: new mongoStore({ db: mongoose.connection.db })
   }));
   this.use(passport.initialize());
   this.use(passport.session());
   this.use(this.router);
+
+  this.datastore(mongooseDataStore);
 }
