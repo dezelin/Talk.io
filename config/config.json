@@ -5,13 +5,13 @@
     "hostnames": ["localhost:6379"],
     "ttl": "360",
     "prefix": "cache:",
-    "username": "talk",
-    "password": "password"
+    "username": "",
+    "password": ""
   },
   "mongooseOptions": {
     "database": "talk_io",
-    "hostnames": ["localhost:27017", "localhost"],
-    "username": "talk",
-    "password": "password"
+    "hostnames": ["localhost:27017"],
+    "username": "",
+    "password": ""
   }
 }
