@@ -9,3 +9,6 @@ block body
       p User: #{user.email}
       p Full name: #{user.name.first} #{user.name.last}
       p Hash: #{user.hash}
+
+    div
+      a(href = urlFor({ controller: 'account', action: 'logout' })) Logout
