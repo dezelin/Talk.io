@@ -1,0 +1,16 @@
+// Jade
+
+extends ../layout
+
+block body
+  article
+    form(action=accountURL(), method='POST')
+      label(for='email') eMail
+      input(type='text', name='email')
+      label(for='password') Password
+      input(type='password', name='password')
+      label(for='name.first') First Name
+      input(type='text', name='name.first')
+      label(for='name.last') Last Name
+      input(type='text', name='name.last')
+      button(type='submit') Register
