@@ -1,0 +1,11 @@
+// Jade
+
+extends ../layout
+
+block body
+  article
+    div 
+      p ObjectId: #{user._id}
+      p User: #{user.email}
+      p Full name: #{user.name.first} #{user.name.last}
+      p Hash: #{user.hash}
