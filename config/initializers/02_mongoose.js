@@ -1,42 +1,6 @@
-var assert = require('assert')
-  , mongoose = require('mongoose')
-  , mongooseTypes = require('mongoose-types');
-
-DEFAULT_MONGOOSE_SERVER = 'localhost';
-DEFAULT_MONGOOSE_SERVER_PORT = '27017';
-DEFAULT_MONGOOSE_DB = 'talk_io';
-
-function parseUri(options) {
-  assert(options, 'Illegal argument.');
-
-  var hosts = options.hostnames || [DEFAULT_MONGOOSE_SERVER + 
-    ':' + DEFAULT_MONGOOSE_SERVER_PORT];
-  var db_name = options.database || DEFAULT_DB_NAME;
-  var user = options.username || '';
-  var passw = options.password || '';
-
-  var uri = '';
-  hosts.forEach(function (val, index, array) {
-    assert('string' == typeof val, 'Illegal type.');
-
-    var db_uri = 'mongodb://';
-    if (user) {
-      db_uri += user;
-      if (passw)
-        db_uri += ':\'' + passw + '\'';
-
-      db_uri += '@';
-    }
-
-    db_uri += val + '/' + db_name;
-    if (index < array.length - 1)
-      db_uri += ',';
-
-    uri += db_uri;
-  });
-
-  return uri;
-}
+var mongoose = require('mongoose')
+  , mongooseTypes = require('mongoose-types')
+  , commonUtil = require('../../app/common/util');
 
 module.exports = function () {
   // Any files in this directory will be `require()`'ed when the application
@@ -53,7 +17,7 @@ module.exports = function () {
 
   // Open default db connection
   var options = self.config.mongooseOptions;
-  var db_uri = parseUri(options);
+  var db_uri = commonUtil.parseMongooseOptions(options);
   self.db = mongoose.connect(db_uri, options);
 
   // Load additional mongoose types
