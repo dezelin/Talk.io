@@ -6,9 +6,6 @@ var mongoose = require('mongoose')
 
 
 var AccountSchema = Schema({
-  // Shard key
-  shard: { type: String, unique: true },
-
   // Email address
   email: { type: Email, unique: true },
 
@@ -17,8 +14,13 @@ var AccountSchema = Schema({
 
   // User first and last name
   name: {
-    first: { type: String, required: true },
-    last: { type: String, required: true }
+    first: { type: String, trim: true, required: true },
+    last: { type: String, trim: true, required: true }
+  }
+}
+, {
+  shardkey: {
+    hash: 1
   }
 });
 
@@ -51,7 +53,7 @@ AccountSchema.statics.authenticate = function (email, password, callback) {
       if (!passwordCorrect)
         return callback(null, false);
 
-      return callback(null, true);
+      return callback(null, user);
     });
   });
 }
