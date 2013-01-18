@@ -6,5 +6,10 @@
 // Guide on [routing](http://locomotivejs.org/guide/routing.html) for additional
 // information.
 module.exports = function routes() {
-  this.root('pages#main');
+  var self = this;
+  self.root('pages#main');
+  self.resource('account');
+  self.match('login', 'account#loginForm', { via: 'GET' });
+  self.match('login', 'account#login', { via: 'POST' });
+  self.match('logout', 'account#logout');
 }

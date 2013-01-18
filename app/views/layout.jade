@@ -1,0 +1,38 @@
+// Jade
+
+!!!
+
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Talk.io
+
+    block head
+
+    block links
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css', media='screen')
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='shortcut icon', href='/favicon.ico')
+
+    block scripts
+      script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js')
+      script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js')
+      script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js')
+      <!--[if lt IE 9]>
+      script(src='/javascripts/html5shiv.js')
+      script(src='/javascripts/ie9.js')
+      <![endif]-->
+
+  body
+    header
+      block header
+      nav
+        block navigation
+    
+    block featured
+    block body
+    block extras
+    
+    footer
+      block footer
+      block copyright
