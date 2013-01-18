@@ -6,6 +6,9 @@ DEFAULT_MONGOOSE_SERVER = 'localhost';
 DEFAULT_MONGOOSE_SERVER_PORT = '27017';
 DEFAULT_MONGOOSE_DB = 'talk_io';
 
+DEVELOPMENT_ENV = 'development';
+PRODUCTION_ENV = 'production';
+
 module.exports = exports = function() {
   
 }
