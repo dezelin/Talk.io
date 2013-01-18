@@ -22,11 +22,9 @@ module.exports = function () {
       // Find the user by username.  If there is no user with the given
       // username, or the password is not correct, set the user to `false` to
       // indicate failure.  Otherwise, return the authenticated `user`.
-      Account.authenticate(email, password, function(err, user) {
+      Account.authenticate(email, password, function (err, user) {
         return done(err, user);
       });
-
-      return done(null, null);
     }
   ));
 
@@ -40,8 +38,5 @@ module.exports = function () {
     Account.findById(id, function (err, user) {
       done(err, user);
     });
-
-    return done(null, null);
   });
-
 }
