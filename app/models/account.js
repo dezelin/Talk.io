@@ -22,11 +22,11 @@ var AccountSchema = Schema({
   }
 });
 
-AccountSchema.virtuals.password.get(function () {
+AccountSchema.virtual('password').get(function () {
   return this._password;
 });
 
-AccountSchema.virtuals.password.set(function (password) {
+AccountSchema.virtual('password').set(function (password) {
   this._password = password;
   var salt = bcrypt.genSaltSync(10); // 10 rounds of salt processing
   this.hash = bcrypt.hashSync(password, salt);
