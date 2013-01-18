@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "bcrypt": "0.7.x",
-    "connect-mongodb": "1.1.x",
     "connect-powered-by": "0.1.x",
     "connect-redis": "1.4.x",
     "express": "3.x.x",
