@@ -51,6 +51,7 @@ module.exports = function () {
   self.use(express.logger());
   self.use(express.favicon());
   self.use(express.static(__dirname + '/../../public'));
+  self.use(express.static(__dirname + '/../../components'));
   self.use(express.bodyParser());
   self.use(express.methodOverride());
   self.use(express.cookieParser());
