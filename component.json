@@ -1,0 +1,9 @@
+{
+  "name": "Talk.io",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "~1.9.0",
+    "bootstrap": "~2.2.2",
+    "angular": "~1.0.3"
+  }
+}
