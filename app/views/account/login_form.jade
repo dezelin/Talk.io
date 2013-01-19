@@ -4,8 +4,9 @@ extends ../layout
 
 block body
   form(action='/login', method='POST')
-    label(for='email') Enter your email:
-    input(type='text', name='email', placeholder='You email here')
-    label(for='password') Enter your password:
-    input(type='password', name='password', placeholder='You password here')
-    button(type='submit') Submit
+    fieldset
+      label(for='email') Enter your email:
+      input(type='text', name='email', placeholder='You email here')
+      label(for='password') Enter your password:
+      input(type='password', name='password', placeholder='You password here')
+      button(type='submit') Submit
