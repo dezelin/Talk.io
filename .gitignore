@@ -163,6 +163,7 @@ pip-log.txt
 .DS_Store
 
 # Node.js
+components
 node_modules
 server.js.logs
 server.js.debug
