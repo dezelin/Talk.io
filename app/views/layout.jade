@@ -19,24 +19,45 @@ html(lang='en')
       link(rel='shortcut icon', href='/favicon.ico')
 
   body
-    header
-      block header
-      nav
-        block navigation
+    .container
+      header
+        .masthead
+          h3.muted Talk.io
+
+        block header
+        
+        nav
+          .navbar
+            .navbar-inner
+              .container
+                ul.nav
+                  li.active 
+                    a(href='#') Home
+                  li
+                    a(href='#') About
+                  li
+                    a(href='#') Contact
+
+                  
+          block navigation
     
-    block featured
-    block body
-    block extras
+      block featured
+      block body
+      block extras
     
-    footer
-      block footer
-      block copyright
+      footer
+        block footer
+
+        .footer
+          p &copy; Talk.io headquarters 2012
+
+        block copyright
 
     block scripts
       script(src='/jquery/jquery.min.js')
       script(src='/angular/angular.js')
       script(src='/bootstrap/docs/assets/js/bootstrap.min.js')
-      <!--[if lt IE 9]>
+      // [if lt IE 9]>
       script(src='/javascripts/html5shiv.js')
       script(src='/javascripts/ie9.js')
-      <![endif]-->
+      // ![endif]
