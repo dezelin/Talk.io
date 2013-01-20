@@ -169,3 +169,4 @@ server.js.logs
 server.js.debug
 settings.json
 iisnode
+*.css
