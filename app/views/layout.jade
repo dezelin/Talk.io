@@ -19,6 +19,11 @@ html(lang='en')
       link(rel='stylesheet', href='/stylesheets/style.css')
       link(rel='shortcut icon', href='/favicon.ico')
 
+      // [if lt IE 9]>
+      script(src='/javascripts/html5shiv.js')
+      script(src='/javascripts/ie9.js')
+      // ![endif]
+
   body
     .container
       header
@@ -58,7 +63,3 @@ html(lang='en')
       script(src='/jquery/jquery.min.js')
       script(src='/angular/angular.js')
       script(src='/bootstrap/docs/assets/js/bootstrap.min.js')
-      // [if lt IE 9]>
-      script(src='/javascripts/html5shiv.js')
-      script(src='/javascripts/ie9.js')
-      // ![endif]
