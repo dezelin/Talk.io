@@ -29,7 +29,7 @@ html(lang='en')
     <link rel='shortcut icon' href='/bootstrap/docs/assets/ico/favicon.png'>
 
   body
-    
+
     .container
 
         section.row-fluid
@@ -61,29 +61,49 @@ html(lang='en')
             fieldset
               .controls.controls-row
                 .fullName.span6
-                  label.span12(for='fullName') Full Name <span><strong>?</strong></span>
-                  input.span12(type='text', name='fullName')
+                  label.span12(for='fullName') Full Name 
+                    <span rel='tooltip',
+                    | title='Your full name here can be any alphanumeric character up to 50 characters.'>
+                    | <strong>?</strong>
+                    </span>
+                  input.span12(type='text', name='fullName', required='required')
                 .email.span6
                   label.span12(for='email') Email
-                  input.span12(type='email', name='email') 
+                  input.span12(type='email', name='email', required='required') 
 
               .controls.controls-row
                 .password.span6
-                  label.span12(for='password') Password <span><strong>?</strong></span>
-                  input.span12(type='password', name='password')
+                  label.span12(for='password') Password 
+                    <span rel='tooltip',
+                    | title='Your password is case sensitive and must be between 6 and 50 characters. It cannot resemble your name, username or email.'>
+                    | <strong>?</strong>
+                    </span>
+                  input.span12(type='password', name='password', required='required')
                 .dateOfBirth.span6
-                  label.span12(for='dobMonth') Date of birth <span><strong>?</strong></span>
-                  input.input-mini.span3(type='text', maxlength='2', name='dobMonth', placeholder='MM',  pattern='0?[1-9]|1[0-2]')
-                  input.input-mini.span3(type='text', maxlength='2', name='dobDay',   placeholder='DD',  pattern='0?[1-9]|([1-2][0-9])|3[0-1]')
-                  input.input-mini.span4(type='text', maxlength='4', name='dobYear',  placeholder='YYY', pattern='19[0-9][0-9]|20[0-9][0-9]')
+                  label.span12(for='dobMonth') Date of birth 
+                    <span rel='tooltip',
+                    | title='Please tell us your date of birth so we can ensure that you are the appropriate age to access all Talk.io contents.'>
+                    | <strong>?</strong>
+                    </span>
+                  input.input-mini.span3(type='text', maxlength='2', name='dobMonth', placeholder='MM',  required='required', pattern='0?[1-9]|1[0-2]')
+                  input.input-mini.span3(type='text', maxlength='2', name='dobDay',   placeholder='DD',  required='required', pattern='0?[1-9]|([1-2][0-9])|3[0-1]')
+                  input.input-mini.span4(type='text', maxlength='4', name='dobYear',  placeholder='YYY', required='required', pattern='19[0-9][0-9]|20[0-9][0-9]')
 
               .controls.controls-row
                 .username.span6
-                  label.span12(for='username') Username <span><strong>?</strong></span>
-                  input.span12(type='text', name='username')
+                  label.span12(for='username') Username 
+                    <span rel='tooltip',
+                    | title='Your username has a 50 characters limit and must contain at least one alpha numeric character.'>
+                    | <strong>?</strong>
+                    </span>
+                  input.span12(type='text', name='username', required='required')
                 .gender.span6
-                  label.span12(for='gender') Select gender <span><strong>?</strong></span>
-                  select.span12(name='gender')
+                  label.span12(for='gender') Select gender 
+                    <span rel='tooltip',
+                    | title='We ask for gender to help keep people searchable on Talk.io.'>
+                    | <strong>?</strong>
+                    </span>
+                  select.span12(name='gender', required='required')
                     option(selected='', disabled=true) Please select
                     option(value='male') Male
                     option(value='female') Female
@@ -92,13 +112,23 @@ html(lang='en')
           footer.row-fluid
             .span6.offset2
                 label.checkbox
-                  input(type='checkbox', id='iagree')
-                  label(for='iagree') By checking the box and clicking "Join", I understand that I am joining the Talk.io, 
-                    | and I have read and accept the <a href='#'>Terms of Use Agreement</a> and consent to the <a href='#'>Privacy Policy</a>.
+                  input(type='checkbox', id='iagree', required='required')
+                  label(for='iagree') 
+                    | By checking the box and clicking "Join", I understand that I am joining the Talk.io, 
+                    | and I have read and accept the 
+                    | <a href='#'>Terms of Use Agreement</a> 
+                    | and consent to the 
+                    | <a href='#'>Privacy Policy</a>.
 
             .span4
               button.btn.btn-primary.btn-large(type='button') Join
-        
+
     script(src='/jquery/jquery.min.js')
     script(src='/angular/angular.js')
     script(src='/bootstrap/docs/assets/js/bootstrap.min.js')
+
+    //- Activate Bootstrap tooltips 
+    script
+      $(document).ready(function () {
+        $('[rel=tooltip]').tooltip();
+      });
