@@ -35,6 +35,16 @@ AccountController.show = function() {
   self.render();  
 }
 
+AccountController.signup = function() {
+  var self = this;
+  self.render();
+}
+
+AccountController.signupForm = function() {
+  var self = this;
+  self.render();
+}
+
 AccountController.edit = function() {
   var self = this;
   self.render();  

@@ -12,4 +12,6 @@ module.exports = function routes() {
   self.match('login', 'account#loginForm', { via: 'GET' });
   self.match('login', 'account#login', { via: 'POST' });
   self.match('logout', 'account#logout');
+  self.match('signup', 'account#signupForm', { via: 'GET'});
+  self.match('signup', 'account#signup', { via: 'POST'});
 }

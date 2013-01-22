@@ -1,0 +1,104 @@
+// Jade
+
+!!!
+
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Welcome to Talk.io
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='Talk.io teleconferencing web application')
+    meta(name='author', content='Aleksandar Dezelin')
+
+    link(rel='stylesheet', href='/normalize-css/normalize.css')
+    link(rel='stylesheet', href='/bootstrap/docs/assets/css/bootstrap.css')
+    link(rel='stylesheet', href='/bootstrap/docs/assets/css/bootstrap-responsive.css')
+    link(rel='stylesheet', href='/stylesheets/pages/signup_form.css')
+    link(rel='shortcut icon', href='/favicon.ico')
+
+    // [if lt IE 9]>
+    script(src='/javascripts/html5shiv.js')
+    script(src='/javascripts/ie9.js')
+    // ![endif]
+
+    // Fav and touch icons
+    <link rel='apple-touch-icon-precomposed' sizes='144x144' href='/bootstrap/docs/assets/ico/apple-touch-icon-144-precomposed.png'>
+    <link rel='apple-touch-icon-precomposed' sizes='114x114' href='/bootstrap/docs/assets/ico/apple-touch-icon-114-precomposed.png'>
+    <link rel='apple-touch-icon-precomposed' sizes='72x72' href='/bootstrap/docs/assets/ico/apple-touch-icon-72-precomposed.png'>
+    <link rel='apple-touch-icon-precomposed' href='/bootstrap/docs/assets/ico/apple-touch-icon-57-precomposed.png'>
+    <link rel='shortcut icon' href='/bootstrap/docs/assets/ico/favicon.png'>
+
+  body
+    
+    .container
+
+        section.row-fluid
+          header.offset2
+            // Empty grid separators
+            div.span12
+            div.span12
+            div.span12
+
+            h1.muted Join Talk.io
+
+          // Empty grid separators
+          div.span12
+          div.span12
+
+          aside.span4
+            // Empty grid separator
+            .span7.offset5
+            .span7.offset5
+              button.btn.btn-block(type='button') with Facebook
+
+            .span7.offset5
+              button.btn.btn-block(type='button') with Twitter
+
+            .span7.offset5
+              button.btn.btn-block(type='button') with Google
+
+          form(action='signup', method='POST').span5.row-fluid
+            fieldset
+              .controls.controls-row
+                .fullName.span6
+                  label.span12(for='fullName') Full Name <span><strong>?</strong></span>
+                  input.span12(type='text', name='fullName')
+                .email.span6
+                  label.span12(for='email') Email
+                  input.span12(type='email', name='email') 
+
+              .controls.controls-row
+                .password.span6
+                  label.span12(for='password') Password <span><strong>?</strong></span>
+                  input.span12(type='text', name='password')
+                .dateOfBirth.span6
+                  label.span12(for='dobMonth') Date of birth <span><strong>?</strong></span>
+                  input.input-mini.span3(type='text', maxlength='2', name='dobMonth', placeholder='MM',  pattern='0?[1-9]|1[0-2]')
+                  input.input-mini.span3(type='text', maxlength='2', name='dobDay',   placeholder='DD',  pattern='0?[1-9]|([1-2][0-9])|3[0-1]')
+                  input.input-mini.span4(type='text', maxlength='4', name='dobYear',  placeholder='YYY', pattern='19[0-9][0-9]|20[0-9][0-9]')
+
+              .controls.controls-row
+                .username.span6
+                  label.span12(for='username') Username <span><strong>?</strong></span>
+                  input.span12(type='text', name='username')
+                .gender.span6
+                  label.span12(for='gender') Select gender <span><strong>?</strong></span>
+                  select.span12(name='gender')
+                    option(selected='', disabled=true) Please select
+                    option(value='male') Male
+                    option(value='female') Female
+                    option(value='unspecified') Unspecified
+        
+          footer.row-fluid
+            .span6.offset2
+                label.checkbox
+                  input(type='checkbox', id='iagree')
+                  label(for='iagree') By checking the box and clicking "Join", I understand that I am joining the Talk.io, 
+                    | and I have read and accept the <a href='#'>Terms of Use Agreement</a> and consent to the <a href='#'>Privacy Policy</a>.
+
+            .span4
+              button.btn.btn-primary(type='button') Join
+        
+    script(src='/jquery/jquery.min.js')
+    script(src='/angular/angular.js')
+    script(src='/bootstrap/docs/assets/js/bootstrap.min.js')
