@@ -3,6 +3,7 @@ var express = require('express')
   , passport = require('passport')
   , mongoose = require('mongoose')
   , mongooseDataStore = require('locomotive-mongoose')
+  , nconf = require('nconf')
   , util = require('util');
 
 
@@ -41,8 +42,19 @@ module.exports = function () {
   // JSON or XML response.
   /* self.format('xml', { engine: 'xmlb' }); */
 
+  //
+  // Setup nconf to use (in-order):
+  //   1. Command-line arguments
+  //   2. Environment variables
+  //   3. A file located at 'path/to/config.json'
+  //
+  nconf.argv().env().file({
+    file: 'config/config.json',
+    format: nconf.formats.json
+  });
+
   // Load config file.
-  self.config = require('../config.json');
+  var config_store = nconf.stores.file.store;
 
   // Use middleware.  Standard [Connect](http://www.senchalabs.org/connect/)
   // middleware is built-in, with additional [third-party](https://github.com/senchalabs/connect/wiki)
@@ -56,7 +68,7 @@ module.exports = function () {
   self.use(express.methodOverride());
   self.use(express.cookieParser());
   self.use(express.session({
-    secret: self.config.sessionSecret
+    secret: config_store.sessionSecret
   }));
   self.use(passport.initialize());
   self.use(passport.session());

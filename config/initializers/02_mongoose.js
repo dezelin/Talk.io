@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
   , mongooseTypes = require('mongoose-types')
+  , nconf = require('nconf')
   , commonUtil = require('../../app/common/util');
 
 module.exports = function () {
@@ -16,7 +17,7 @@ module.exports = function () {
   var self = this;
 
   // Open default db connection
-  var options = self.config.mongooseOptions;
+  var options = nconf.stores.file.store.mongooseOptions;
   var db_uri = commonUtil.parseMongooseOptions(options);
   self.db = mongoose.connect(db_uri, options);
 
