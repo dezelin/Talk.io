@@ -1,5 +1,6 @@
 {
   "sessionSecret": "default secret",
+  "webAppUrl": "http://localhost/",
   "redisOptions": {
     "database": "talk_io",
     "hostnames": ["localhost:6379"],
@@ -13,5 +14,7 @@
     "hostnames": ["localhost:27017"],
     "username": "",
     "password": ""
-  }
+  },
+  "FACEBOOK_APP_ID": "285441791468294",
+  "FACEBOOK_APP_SECRET": "5ccfb8bd9ed45b4594b9e527927f688b"
 }

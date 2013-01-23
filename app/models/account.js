@@ -2,7 +2,8 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , Email = mongoose.SchemaTypes.Email
-  , bcrypt = require('bcrypt');
+  , bcrypt = require('bcrypt')
+  , ProviderAccount = require('./provider_account');
 
 
 var AccountSchema = Schema({
@@ -16,7 +17,10 @@ var AccountSchema = Schema({
   name: {
     first: { type: String, trim: true, required: true },
     last: { type: String, trim: true, required: true }
-  }
+  },
+
+  // Associated service provider accounts
+  providerAccounts: { type: Schema.Types.ObjectId, ref: 'ProviderAccount' }
 }
 , {
   shardkey: {

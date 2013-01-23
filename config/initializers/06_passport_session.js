@@ -1,6 +1,4 @@
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy
-  , Account = require('../../app/models/account');
+var passport = require('passport');
 
 module.exports = function () {
   // Any files in this directory will be `require()`'ed when the application
@@ -12,21 +10,6 @@ module.exports = function () {
   // `done` is a callback which must be invoked when the initializer is
   // finished.  Initializers are invoked sequentially, ensuring that the
   // previous one has completed before the next one executes.
-
-  // Use the LocalStrategy within Passport.
-
-  passport.use(new LocalStrategy({
-    usernameField: 'email'
-  },
-    function (email, password, done) {
-      // Find the user by username.  If there is no user with the given
-      // username, or the password is not correct, set the user to `false` to
-      // indicate failure.  Otherwise, return the authenticated `user`.
-      Account.authenticate(email, password, function (err, user) {
-        return done(err, user);
-      });
-    }
-  ));
 
   // Passport session setup.
 
@@ -40,3 +23,4 @@ module.exports = function () {
     });
   });
 }
+
