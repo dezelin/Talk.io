@@ -2,6 +2,10 @@
   "name": "app-name",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.2.x"
+  },
   "dependencies": {
     "bcrypt": "0.7.x",
     "connect-powered-by": "0.1.x",
