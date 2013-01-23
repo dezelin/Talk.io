@@ -42,17 +42,6 @@ module.exports = function () {
   // JSON or XML response.
   /* self.format('xml', { engine: 'xmlb' }); */
 
-  //
-  // Setup nconf to use (in-order):
-  //   1. Command-line arguments
-  //   2. Environment variables
-  //   3. A file located at 'path/to/config.json'
-  //
-  nconf.argv().env().file({
-    file: 'config/config.json',
-    format: nconf.formats.json
-  });
-
   // Load config file.
   var config_store = nconf.stores.file.store;
 

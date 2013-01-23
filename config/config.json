@@ -1,6 +1,9 @@
 {
   "sessionSecret": "default secret",
-  "webAppUrl": "http://localhost/",
+  "serverURL": "http://localhost/",
+  "serverHost": "0.0.0.0",
+  "serverPort": "3000",
+  "environment": "development",
   "redisOptions": {
     "database": "talk_io",
     "hostnames": ["localhost:6379"],

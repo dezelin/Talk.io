@@ -1,9 +1,11 @@
 var assert = require('assert')
   , util = require('../../app/common/util')
-  , data = require('../../app/common/populate_database');
+  , data = require('../../app/common/populate_database')
+  , stackInfo = require('../../app/common/stack_info');
 
 module.exports = function () {
-  switch (process.env.NODE_ENV) {
+  var environment = stackInfo.getEnvironment();
+  switch (environment) {
     case DEVELOPMENT_ENV:
       {
         data.populateDevelopmentData();

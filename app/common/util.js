@@ -1,18 +1,13 @@
 
 var assert = require('assert')
   , nconf = require('nconf')
-  , url = require('url');
+  , url = require('url')
+  , stackInfo = require('./stack_info');
 
 
 DEFAULT_MONGOOSE_SERVER = 'localhost';
 DEFAULT_MONGOOSE_SERVER_PORT = '27017';
 DEFAULT_MONGOOSE_DB = 'talk_io';
-
-DEVELOPMENT_ENV = 'development';
-PRODUCTION_ENV = 'production';
-
-NCONF_WEB_APP_URL = 'webAppUrl';
-DEFAULT_WEB_APP_URL = 'http://localhost/';
 
 AUTH_PROVIDER_FACEBOOK = 'Facebook';
 
@@ -59,11 +54,9 @@ exports.getAuthCallbackURL = function getAuthCallbackURL(options) {
   assert(options, ASSERT_ILLEGAL_ARG);
   assert(options.provider, ASSERT_ILLEGAL_ARG);
 
-  var webAppUrl = nconf.get(NCONF_WEB_APP_URL) || DEFAULT_WEB_APP_URL;
+  var webAppUrl = stackInfo.getServerURL();
   var URL = url.parse(webAppUrl);
-  var port = URL.port || nconf.get('PORT');
-  assert(port, 'Please specify port in \'' + NCONF_WEB_APP_URL + 
-    '\' in config file or as the PORT environment variable.');
+  var port = stackInfo.getServerPort();
 
   var callbackURL = {};
   callbackURL.protocol = URL.protocol;
