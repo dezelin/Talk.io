@@ -6,6 +6,7 @@ var assert = require('assert')
   , FacebookStrategy = require('passport-facebook').Strategy
   , Account = require('../../app/models/account')
   , ProviderAccount = require('../../app/models/provider_account')
+  , stackInfo = require('../../app/common/stack_info')
   , util = require('../../app/common/util');
 
 FACEBOOK_APP_ID = 'FACEBOOK_APP_ID';
@@ -25,18 +26,13 @@ module.exports = function () {
 
   // Use the FacebookStrategy within Passport.
 
-  var fbAppID = nconf.get(FACEBOOK_APP_ID);
-  var fbAppSecret = nconf.get(FACEBOOK_APP_SECRET);
+  var fbAppID = stackInfo.Facebook.getAppID();
+  var fbAppSecret = stackInfo.Facebook.getAppSecret();
   var fbCallbackURL = util.getAuthCallbackURL({
     provider: GLOBAL.AUTH_PROVIDER_FACEBOOK
   });
 
-  assert(fbAppID,
-    'Please specify \'' + FACEBOOK_APP_ID + '\' in config file.');
-  assert(fbAppSecret,
-    'Please specify \'' + FACEBOOK_APP_SECRET + '\' in config file.');
-  assert(fbCallbackURL,
-    'Facebook callback URL cannot be constructed.');
+  debugger;
 
   passport.use(new FacebookStrategy({
     clientID: fbAppID,
@@ -59,6 +55,7 @@ module.exports = function () {
     };
 
     process.nextTick(function () {
+
       if (!req.user) {
         // Not logged-in. Authenticate based on Facebook account.
         step(
@@ -103,7 +100,7 @@ module.exports = function () {
           },
           function ignore(err, user) {
             // Ignore errors
-            if (err) 
+            if (err)
               console.log(err);
           }
         );

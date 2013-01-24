@@ -9,16 +9,71 @@ PRODUCTION_ENV = 'production';
 var StacksEnum = { 'LOCAL': 0, 'APPFROG': 1 };
 Object.freeze(StacksEnum);
 
-
-var StackInfo = function() {
-  
-}
-
-StackInfo.prototype.getType = function () {
+function getStackType () {
   assert(nconf.env, 'Environment not loaded.');
   var type = nconf.env.VCAP_SERVICES ?
     StacksEnum.APPFROG : StacksEnum.LOCAL;
   return type;
+}
+
+var FacebookInfo = function () {
+  
+}
+
+FacebookInfo.prototype.getAppID = function () {
+  var id;
+  var type = getStackType();
+  switch (type) {
+    case StacksEnum.LOCAL:
+      {
+        id = nconf.get('FACEBOOK_APP_ID');
+        break;
+      }
+    case StacksEnum.APPFROG:
+      {
+        id = nconf.get('FACEBOOK_APP_ID');
+        break;
+      }
+    default:
+      {
+        assert(false, 'Unknown stack type.');
+      }
+  }
+
+  assert(id, 'FACEBOOK_APP_ID is not defined.');
+  return id;
+}
+
+FacebookInfo.prototype.getAppSecret = function () {
+  var secret;
+  var type = getStackType();
+  switch (type) {
+    case StacksEnum.LOCAL:
+      {
+        secret = nconf.get('FACEBOOK_APP_SECRET');
+        break;
+      }
+    case StacksEnum.APPFROG:
+      {
+        secret = nconf.get('FACEBOOK_APP_SECRET');
+        break;
+      }
+    default:
+      {
+        assert(false, 'Unknown stack type.');
+      }
+  }
+
+  assert(secret, 'FACEBOOK_APP_SECRET is not defined.');
+  return secret;
+}
+
+var StackInfo = function () {
+  this.Facebook = new FacebookInfo();
+}
+
+StackInfo.prototype.getType = function () {
+  return getStackType();
 }
 
 StackInfo.prototype.getEnvironment = function () {
