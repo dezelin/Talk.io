@@ -167,6 +167,7 @@ components
 node_modules
 server.js.logs
 server.js.debug
+config/config.json
 settings.json
 iisnode
 *.css

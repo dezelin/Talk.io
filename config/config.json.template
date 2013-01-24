@@ -1,7 +1,7 @@
 {
   "sessionSecret": "default secret",
   "serverURL": "http://localhost/",
-  "serverHost": "0.0.0.0",
+  "serverHost": "127.0.0.1",
   "serverPort": "3000",
   "environment": "development",
   "redisOptions": {
