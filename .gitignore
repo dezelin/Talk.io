@@ -170,4 +170,6 @@ server.js.debug
 config/config.json
 settings.json
 iisnode
+npm-shrinkwrap.json
 *.css
+
