@@ -22,6 +22,6 @@ locomotive.boot(__dirname, env, function (err, server) {
   if (err) { throw err; }
   server.listen(port, address, function () {
     var addr = this.address();
-    console.log('listening on% s:% d', addr.address, addr.port);
+    console.log('listening on %s:%d', addr.address, addr.port);
   });
 });
