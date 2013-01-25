@@ -2,7 +2,7 @@
 var assert = require('assert')
   , nconf = require('nconf')
   , url = require('url')
-  , stackInfo = require('./stack_info');
+  , stackInfo = require('./stack_info').StackInfo;
 
 
 DEFAULT_MONGOOSE_SERVER = 'localhost';
@@ -54,7 +54,7 @@ exports.getAuthCallbackURL = function getAuthCallbackURL(options) {
   assert(options, ASSERT_ILLEGAL_ARG);
   assert(options.provider, ASSERT_ILLEGAL_ARG);
 
-  var webAppUrl = stackInfo.getServerURL();
+  var webAppUrl = stackInfo.getServerUrl();
   var URL = url.parse(webAppUrl);
   var port = stackInfo.getServerPort();
 

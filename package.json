@@ -6,6 +6,7 @@
     "bcrypt": "0.7.x",
     "connect-powered-by": "0.1.x",
     "connect-redis": "1.4.x",
+    "enum": "0.2.x",
     "express": "3.x.x",
     "jade": "0.28.x",
     "locomotive": "0.3.x",

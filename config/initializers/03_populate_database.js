@@ -1,24 +1,22 @@
-var assert = require('assert')
-  , util = require('../../app/common/util')
-  , data = require('../../app/common/populate_database')
-  , stackInfo = require('../../app/common/stack_info');
+var assert = require('assert'),
+    util = require('../../app/common/util'),
+    data = require('../../app/common/populate_database'),
+    EnvType = require('../../app/common/config/env_type').Type,
+    stackInfo = require('../../app/common/stack_info').StackInfo;
 
 module.exports = function () {
-  var environment = stackInfo.getEnvironment();
-  switch (environment) {
-    case DEVELOPMENT_ENV:
-      {
+  var envType = stackInfo.getServerNodeEnv();
+  switch (envType) {
+    case EnvType.DEV: {
         data.populateDevelopmentData();
         break;
-      }
-    case PRODUCTION_ENV:
-      {
+    }
+    case EnvType.PROD: {
         data.populateProductionData();
         break;
-      }
-    default:
-      {
+    }
+    default: {
         assert(false, 'Unsupported Node.js environment.');
-      }
+    }
   }
 }

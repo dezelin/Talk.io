@@ -6,7 +6,7 @@ var assert = require('assert')
   , FacebookStrategy = require('passport-facebook').Strategy
   , Account = require('../../app/models/account')
   , ProviderAccount = require('../../app/models/provider_account')
-  , stackInfo = require('../../app/common/stack_info')
+  , stackInfo = require('../../app/common/stack_info').StackInfo
   , util = require('../../app/common/util');
 
 FACEBOOK_APP_ID = 'FACEBOOK_APP_ID';
@@ -26,8 +26,8 @@ module.exports = function () {
 
   // Use the FacebookStrategy within Passport.
 
-  var fbAppID = stackInfo.Facebook.getAppID();
-  var fbAppSecret = stackInfo.Facebook.getAppSecret();
+  var fbAppID = stackInfo.getFacebookAppId();
+  var fbAppSecret = stackInfo.getFacebookAppSecret();
   var fbCallbackURL = util.getAuthCallbackURL({
     provider: GLOBAL.AUTH_PROVIDER_FACEBOOK
   });

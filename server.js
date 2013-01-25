@@ -1,6 +1,6 @@
-var locomotive = require ('locomotive')
-  , nconf = require('nconf')
-  , stackInfo = require('./app/common/stack_info');
+var locomotive = require ('locomotive'),
+    nconf = require('nconf'),
+    StackInfo = require('./app/common/stack_info').StackInfo;
 
 
 //
@@ -14,9 +14,9 @@ nconf.argv().env().file({
   format: nconf.formats.json
 });
 
-var env = stackInfo.getEnvironment()
-	, port = stackInfo.getServerPort()
-	, address = stackInfo.getServerHost();
+var env = StackInfo.getServerNodeEnvAsString()
+	, port = StackInfo.getServerPort()
+	, address = StackInfo.getServerHost();
 
 locomotive.boot(__dirname, env, function (err, server) {
   if (err) { throw err; }
