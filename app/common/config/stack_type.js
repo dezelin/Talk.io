@@ -4,13 +4,15 @@ var assert = require('assert'),
 
 var StackType = new Enum({
 	'UNKNOWN': 1,
-	'LOCAL': 2, 
+	'LOCAL': 2,
 	'APPFOG': 3
 });
 
+VCAP_APPLICATION = 'VCAP_APPLICATION';
+
 function getStackType() {
   assert(nconf.env, 'nconf not initialized.');
-  return nconf.env.VCAP_SERVICES ? StackType.APPFROG 
+  return nconf.get(VCAP_APPLICATION) ? StackType.APPFOG
     : StackType.LOCAL;
 }
 
