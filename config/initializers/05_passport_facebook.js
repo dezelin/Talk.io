@@ -1,7 +1,7 @@
 
-var assert = require('assert')
+var async = require('async')
+  , assert = require('assert')
   , nconf = require('nconf')
-  , step = require('step')
   , passport = require('passport')
   , logger = require('winston')
   , FacebookStrategy = require('passport-facebook').Strategy
@@ -59,52 +59,53 @@ module.exports = function () {
 
       if (!req.user) {
         // Not logged-in. Authenticate based on Facebook account.
-        step(
-          function authenticateNotLoggedIn() {
+        async.waterfall([
+          function authenticateNotLoggedIn(callback) {
             ProviderAccount.authenticate(FACEBOOK_DOMAIN, profile.id, this);
           },
-          function finish(err, user) {
-            if (err || user)
-              return done(err, user);
+          function finish(user, callback) {
+            if (!user)
+              return callback('No user.');
 
-            return done(null, createProviderAccount());
+            return callback(null, createProviderAccount());
           }
-        );
+        ], function(err, result) {
+          return done(err, result);
+        });
       } else {
         // Logged in. Associate Facebook account with user.  Preserve the login
         // state by supplying the existing user after association.
         var providerAccount;
-        step(
-          function authenticateLoggedIn() {
-            ProviderAccount.authenticate(FACEBOOK_DOMAIN, profile.id, this);
+        async.waterfall([
+          function authenticateLoggedIn(callback) {
+            ProviderAccount.authenticate(FACEBOOK_DOMAIN, profile.id, callback);
           },
-          function updateProviderAccount(err, user) {
-            if (err || user)
-              throw err;
+          function updateProviderAccount(user, callback) {
+            if (!user)
+              return callback('No user.');
 
             var account = createProviderAccount();
-            account.save(this);
+            account.save(callback);
           },
-          function findUserAccount(err, account) {
-            if (err)
-              throw err;
+          function findUserAccount(account, callback) {
+            if (!account)
+              return callback('No account.');
 
             providerAccount = account;
-            Account.findOne({}, this);
+            Account.findOne({}, callback);
           },
-          function associateAccounts(err, user) {
-            if (err)
-              throw err;
+          function associateAccounts(user, callback) {
+            if (!user)
+              return callback('No user.');
 
             user.providerAccounts.push(account);
-            user.save(this);
-          },
-          function ignore(err, user) {
-            // Ignore errors
-            if (err)
-              logger.error(err);
+            user.save(callback);
           }
-        );
+        ], function ignore(err, user) {
+          // Ignore errors
+          if (err)
+            logger.error(err);
+        });
 
         return done(null, req.user);
       }

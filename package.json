@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "async": "0.1.22",
     "bcrypt": "0.7.x",
     "connect-powered-by": "0.1.x",
     "connect-redis": "1.4.x",
@@ -22,7 +23,6 @@
     "redis": "0.8.x",
     "socket.io": "0.9.x",
     "stack-angular": "0.0.x",
-    "step": "0.0.x",
     "twitter-bootstrap": "2.1.x",
     "winston": "0.6.x"
   }
