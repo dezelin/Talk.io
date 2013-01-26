@@ -1,6 +1,6 @@
 {
   "sessionSecret": "default secret",
-  "serverURL": "http://localhost/",
+  "serverUrl": "http://localhost/",
   "serverHost": "127.0.0.1",
   "serverPort": "3000",
   "environment": "development",
