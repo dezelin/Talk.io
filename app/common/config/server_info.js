@@ -100,7 +100,7 @@ ServerAppFogStackInfo.prototype.getServerNodeEnv = function () {
 }
 
 ServerAppFogStackInfo.prototype.getServerNodeEnvAsString = function () {
-	var nodeEnv = nconf.get(SERVER_LOCAL_NODE_ENV);
+	var nodeEnv = nconf.get(SERVER_APPFOG_NODE_ENV);
 	switch (nodeEnv) {
 		case DEVELOPMENT_ENV_APPFOG:
 		case PRODUCTION_ENV_APPFOG:
