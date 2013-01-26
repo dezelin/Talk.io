@@ -1,11 +1,11 @@
 var assert = require('assert'),
+	Enum = require('enum')
 	nconf = require('nconf');
 
-var EnvType = {
-	"DEV": 0,
-	"PROD": 1
-};
-
-Object.freeze(EnvType);
+var EnvType = new Enum({
+	"UNKNOWN": 0,
+	"DEV": 1,
+	"PROD": 2
+});
 
 module.exports.Type = EnvType;
