@@ -1,22 +1,22 @@
---- 
-applications: 
-  .: 
+---
+applications:
+  .:
     name: talk-io
-    framework: 
+    framework:
       name: node
-      info: 
+      info:
         mem: 256M
         description: Node.js Application
-        exec: 
-    infra: ap-aws
+        exec:
+    infra: eu-aws
     url: ${name}.${target-base}
     mem: 256M
     instances: 2
     runtime: node08
-    services: 
-      talk-io-mongodb: 
+    services:
+      talk-io-mongodb:
         type: mongodb
-      talk-io-redis: 
+      talk-io-redis:
         type: redis
-      talk-io-rabbitmq: 
+      talk-io-rabbitmq:
         type: rabbitmq
