@@ -11,7 +11,7 @@ applications:
     infra: eu-aws
     url: ${name}.${target-base}
     mem: 256M
-    instances: 2
+    instances: 1
     runtime: node08
     services:
       talk-io-mongodb:
