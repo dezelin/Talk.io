@@ -1,7 +1,7 @@
 var locomotive = require ('locomotive'),
     nconf = require('nconf'),
-    StackInfo = require('./app/common/stack_info').StackInfo;
-
+    util = require('util'),
+    logger = require('winston');
 
 //
 // Setup nconf to use (in-order):
@@ -14,9 +14,15 @@ nconf.argv().env().file({
   format: nconf.formats.json
 });
 
-var env = StackInfo.getServerNodeEnvAsString()
-	, port = StackInfo.getServerPort()
-	, address = StackInfo.getServerHost();
+logger.info('Full stack environment:');
+logger.info('=======================\n');
+logger.info(util.inspect(nconf.stores, false, null));
+logger.info('=======================\n');
+
+var StackInfo = require('./app/common/stack_info').StackInfo,
+    env = StackInfo.getServerNodeEnvAsString(),
+    port = StackInfo.getServerPort(),
+    address = StackInfo.getServerHost();
 
 locomotive.boot(__dirname, env, function (err, server) {
   if (err) { throw err; }
