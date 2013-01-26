@@ -15,7 +15,7 @@ ASSERT_ILLEGAL_ARG = 'Illegal argument.';
 ASSERT_ILLEGAL_TYPE = 'Illegal type.';
 
 module.exports = exports = function() {
-  
+
 }
 
 exports.parseMongooseOptions = function parseMongooseOptions(options) {
@@ -66,7 +66,7 @@ exports.getAuthCallbackURL = function getAuthCallbackURL(options) {
   switch (options.provider) {
     case AUTH_PROVIDER_FACEBOOK:
       {
-        callbackURL.pathname = '/auth/facebook/callback';
+        callbackURL.pathname = '/auth/facebook_callback';
         break;
       }
     default:
