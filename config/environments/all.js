@@ -4,7 +4,8 @@ var express = require('express')
   , mongoose = require('mongoose')
   , mongooseDataStore = require('locomotive-mongoose')
   , nconf = require('nconf')
-  , util = require('util');
+  , util = require('util')
+  , logger = require('winston');
 
 
 module.exports = function () {
@@ -12,7 +13,7 @@ module.exports = function () {
   // Warn of version mismatch between global "lcm" binary and local installation
   // of Locomotive.
   if (self.version !== require('locomotive').version) {
-    console.warn(util.format('version mismatch between local (%s) and global (%s) Locomotive module', require('locomotive').version, self.version));
+    logger.warn(util.format('version mismatch between local (%s) and global (%s) Locomotive module', require('locomotive').version, self.version));
   }
 
   // Configure application settings.  Consult the Express API Reference for a

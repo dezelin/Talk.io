@@ -3,6 +3,7 @@ var assert = require('assert')
   , nconf = require('nconf')
   , step = require('step')
   , passport = require('passport')
+  , logger = require('winston')
   , FacebookStrategy = require('passport-facebook').Strategy
   , Account = require('../../app/models/account')
   , ProviderAccount = require('../../app/models/provider_account')
@@ -101,7 +102,7 @@ module.exports = function () {
           function ignore(err, user) {
             // Ignore errors
             if (err)
-              console.log(err);
+              logger.error(err);
           }
         );
 

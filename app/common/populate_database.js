@@ -1,6 +1,7 @@
 
 var assert = require('assert')
   , mongoose = require('mongoose')
+  , logger = require('winston')
   , Account = require('../models/account');
 
 
@@ -14,7 +15,7 @@ function populateAccount(data) {
     account.name.last = userInfo.lastName;
 
     account.save(function (err) {
-      console.log('Inserting new account ' + JSON.stringify(userInfo));
+      logger.info('Inserting new account ' + JSON.stringify(userInfo));
       assert(!err, 'Account \'' + userInfo.email + '\' couldn\'t be added.');
     });
 
@@ -76,7 +77,7 @@ function populateProdAccount() {
 
 
 module.exports = exports = function() {
-  
+
 }
 
 module.exports.populateDevelopmentData = function populateDevelopmentData() {
