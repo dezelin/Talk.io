@@ -134,8 +134,8 @@ var ServerStackInfoFactory = (function () {
 	}
 
 	function register(stackType, ServerStackInfo) {
-		return StackInfoFactory.register(factoryType, stackType,
-			ServerStackInfo);
+		StackInfoFactory.register(factoryType, stackType, ServerStackInfo);
+		return ServerStackInfoFactory;
 	}
 
 	return {

@@ -44,8 +44,8 @@ var FacebookStackInfoFactory = (function () {
 	}
 
 	function register(stackType, FacebookStackInfo) {
-		return StackInfoFactory.register(factoryType, stackType,
-			FacebookStackInfo);
+		StackInfoFactory.register(factoryType, stackType, FacebookStackInfo);
+		return FacebookStackInfoFactory;
 	}
 
 	return {
