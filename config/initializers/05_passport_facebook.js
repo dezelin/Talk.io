@@ -8,11 +8,8 @@ var async = require('async')
   , Account = require('../../app/models/account')
   , ProviderAccount = require('../../app/models/provider_account')
   , stackInfo = require('../../app/common/stack_info').StackInfo
+  , FacebookAuthProviderFactory = require('../../app/common/auth/facebook_provider').Factory
   , util = require('../../app/common/util');
-
-FACEBOOK_APP_ID = 'FACEBOOK_APP_ID';
-FACEBOOK_APP_SECRET = 'FACEBOOK_APP_SECRET';
-FACEBOOK_DOMAIN = 'facebook.com';
 
 module.exports = function () {
   // Any files in this directory will be `require()`'ed when the application
@@ -27,25 +24,34 @@ module.exports = function () {
 
   // Use the FacebookStrategy within Passport.
 
-  var fbAppID = stackInfo.getFacebookAppId();
-  var fbAppSecret = stackInfo.getFacebookAppSecret();
-  var fbCallbackURL = util.getAuthCallbackURL({
-    provider: GLOBAL.AUTH_PROVIDER_FACEBOOK
-  });
+  var appId = stackInfo.getFacebookAppId();
+  var appSecret = stackInfo.getFacebookAppSecret();
+  var authProvider = FacebookAuthProviderFactory.create();
+  var callbackUrl = authProvider.getCallbackUrl();
+  var authDomain = authProvider.getAuthDomain();
 
-  debugger;
+  logger.info('Facebook app. id: ' + appId);
+  logger.info('Facebook app. secret: ' + appSecret);
+  logger.info('Facebook callback: ' + callbackUrl);
 
   passport.use(new FacebookStrategy({
-    clientID: fbAppID,
-    clientSecret: fbAppSecret,
-    callbackURL: fbCallbackURL,
+    clientID: appId,
+    clientSecret: appSecret,
+    callbackURL: callbackUrl,
     passReqToCallback: true
   },
   function (req, accessToken, refreshToken, profile, done) {
 
+    var u = require('util');
+    logger.info('Facebook returned!!!');
+    logger.info('req: ' + u.inspect(req, true, null));
+    logger.info('accessToken: ' + u.inspect(accessToken, true, null));
+    logger.info('refreshToken: ' + u.inspect(refreshToken, true, null));
+    logger.info('profile: ' + u.inspect(profile , true, null));
+
     function createProviderAccount() {
       var account = new ProviderAccount();
-      account.domain = FACEBOOK_DOMAIN;
+      account.domain = authDomain;
       account.uid = profile.id;
 
       var token = { kind: 'oauth', token: accessToken,
@@ -61,7 +67,7 @@ module.exports = function () {
         // Not logged-in. Authenticate based on Facebook account.
         async.waterfall([
           function authenticateNotLoggedIn(callback) {
-            ProviderAccount.authenticate(FACEBOOK_DOMAIN, profile.id, this);
+            ProviderAccount.authenticate(authDomain, profile.id, this);
           },
           function finish(user, callback) {
             if (!user)
@@ -78,7 +84,7 @@ module.exports = function () {
         var providerAccount;
         async.waterfall([
           function authenticateLoggedIn(callback) {
-            ProviderAccount.authenticate(FACEBOOK_DOMAIN, profile.id, callback);
+            ProviderAccount.authenticate(authDomain, profile.id, callback);
           },
           function updateProviderAccount(user, callback) {
             if (!user)
