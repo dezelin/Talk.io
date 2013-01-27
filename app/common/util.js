@@ -14,11 +14,17 @@ AUTH_PROVIDER_FACEBOOK = 'Facebook';
 ASSERT_ILLEGAL_ARG = 'Illegal argument.';
 ASSERT_ILLEGAL_TYPE = 'Illegal type.';
 
-module.exports = exports = function() {
+/* Returns the class name of the argument or undefined if
+   it's not a valid JavaScript object.
+*/
+module.exports.getObjectClass = function(obj) {
+    if (!obj)
+      return undefined;
 
+    return obj.name;
 }
 
-exports.parseMongooseOptions = function parseMongooseOptions(options) {
+module.exports.parseMongooseOptions = function(options) {
   assert(options, ASSERT_ILLEGAL_ARG);
 
   var hosts = options.hostnames || [DEFAULT_MONGOOSE_SERVER +
@@ -48,33 +54,4 @@ exports.parseMongooseOptions = function parseMongooseOptions(options) {
   });
 
   return uri;
-}
-
-exports.getAuthCallbackURL = function getAuthCallbackURL(options) {
-  assert(options, ASSERT_ILLEGAL_ARG);
-  assert(options.provider, ASSERT_ILLEGAL_ARG);
-
-  var webAppUrl = stackInfo.getServerUrl();
-  var URL = url.parse(webAppUrl);
-  var port = stackInfo.getServerPort();
-
-  var callbackURL = {};
-  callbackURL.protocol = URL.protocol;
-  callbackURL.hostname = URL.hostname;
-  callbackURL.port = port;
-
-  switch (options.provider) {
-    case AUTH_PROVIDER_FACEBOOK:
-      {
-        callbackURL.pathname = '/auth/facebook_callback';
-        break;
-      }
-    default:
-      {
-        assert(!"Unknown auth provider.");
-      }
-  }
-
-  // Return formatted URL
-  return url.format(callbackURL);
 }
