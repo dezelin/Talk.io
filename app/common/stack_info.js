@@ -1,11 +1,13 @@
 var assert = require('assert'),
     nconf = require('nconf'),
+    TwitterStackInfoFactory = require('./config/twitter_info').Factory,
     FacebookStackInfoFactory = require('./config/facebook_info').Factory,
     ServerStackInfoFactory = require('./config/server_info').Factory,
     StackType = require('./config/stack_type');
 
 
 function StackInfo () {
+  this.twitterInfo = TwitterStackInfoFactory.create();
   this.facebookInfo = FacebookStackInfoFactory.create();
   this.serverInfo = ServerStackInfoFactory.create();
   this.stackType = StackType.getStackType();
@@ -41,6 +43,14 @@ StackInfo.prototype.getFacebookAppId = function () {
 
 StackInfo.prototype.getFacebookAppSecret = function () {
   return this.facebookInfo.getAppSecret();
+}
+
+StackInfo.prototype.getTwitterConsumerKey = function () {
+  return this.twitterInfo.getConsumerKey();
+}
+
+StackInfo.prototype.getTwitterConsumerSecret = function () {
+  return this.twitterInfo.getConsumerSecret();
 }
 
 module.exports.StackInfo = new StackInfo();

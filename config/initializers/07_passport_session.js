@@ -15,10 +15,12 @@ module.exports = function () {
     // Passport session setup.
 
     passport.serializeUser(function (user, done) {
+        console.log('serializeUser');
         done(null, user._id);
     });
 
     passport.deserializeUser(function (id, done) {
+        console.log('deserializeUser');
         Account.findById(id, function (err, user) {
             done(err, user);
       });

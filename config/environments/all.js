@@ -43,8 +43,7 @@ module.exports = function () {
   // JSON or XML response.
   /* self.format('xml', { engine: 'xmlb' }); */
 
-  // Load config file.
-  var config_store = nconf.stores.file.store;
+  var sessionSecret = nconf.get('sessionSecret');
 
   // Use middleware.  Standard [Connect](http://www.senchalabs.org/connect/)
   // middleware is built-in, with additional [third-party](https://github.com/senchalabs/connect/wiki)
@@ -58,7 +57,7 @@ module.exports = function () {
   self.use(express.methodOverride());
   self.use(express.cookieParser());
   self.use(express.session({
-    secret: config_store.sessionSecret
+    secret: sessionSecret
   }));
   self.use(passport.initialize());
   self.use(passport.session());

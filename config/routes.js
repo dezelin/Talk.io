@@ -16,5 +16,7 @@ module.exports = function routes() {
   self.match('signup', 'account#signupForm', { via: 'GET' });
   self.match('signup', 'account#signup', { via: 'POST' });
   self.match('auth/facebook', 'auth#facebook');
-  self.match('auth/facebook_callback', 'auth#facebookCallback');
+  self.match('auth/facebook/callback', 'auth#facebookCallback');
+  self.match('auth/twitter', 'auth#twitter');
+  self.match('auth/twitter/callback', 'auth#twitterCallback');
 }
