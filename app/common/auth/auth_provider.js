@@ -1,7 +1,7 @@
 var assert = require('assert'),
-	url = require('url'),
-	StackType = require('../config/stack_type').Type,
-	stackInfo = require('../stack_info').StackInfo;
+    url = require('url'),
+    StackType = require('../config/stack_type').Type,
+    stackInfo = require('../stack_info').StackInfo;
 
 function AuthProvider(options) {
 	this.options = options || {};
