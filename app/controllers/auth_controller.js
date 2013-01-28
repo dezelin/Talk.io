@@ -17,7 +17,7 @@ AuthController.facebookCallback = function () {
   var self = this;
   passport.authenticate('facebook', {
     successRedirect: self.urlFor({ controller: 'account', action: 'show' }),
-    failureRedirect: self.urlFor({ controller: 'account', action: 'signup' })
+    failureRedirect: self.urlFor({ controller: 'account', action: 'login' })
   })(self.__req, self.__res, self.__next);
 }
 
@@ -33,7 +33,7 @@ AuthController.twitterCallback = function () {
   var self = this;
   passport.authenticate('twitter', {
     successRedirect: self.urlFor({ controller: 'account', action: 'show' }),
-    failureRedirect: self.urlFor({ controller: 'account', action: 'signup' })
+    failureRedirect: self.urlFor({ controller: 'account', action: 'login' })
   })(self.__req, self.__res, self.__next);
 }
 

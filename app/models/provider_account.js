@@ -14,7 +14,7 @@ var __TokensSchema = Schema({
 
 var ProviderAccountSchema = Schema({
   // OAuth user domain: 'twitter.com', 'facebook.com', 'google.com'...
-  domain: { type: String, unique: true },
+  authDomain: { type: String, required: true },
 
   // OAuth user id
   uid: { type: String, required: true },
@@ -29,7 +29,7 @@ var ProviderAccountSchema = Schema({
 });
 
 ProviderAccountSchema.statics.authenticate = function (domain, uid, callback) {
-  this.findOne({ domain: domain, uid: uid }, function (err, user) {
+  this.findOne({ authDomain: domain, uid: uid }, function (err, user) {
     if (err)
       return callback(err);
 
