@@ -1,7 +1,6 @@
 
 var async = require('async')
   , assert = require('assert')
-  , nconf = require('nconf')
   , passport = require('passport')
   , logger = require('winston')
   , FacebookStrategy = require('passport-facebook').Strategy
