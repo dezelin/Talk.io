@@ -41,13 +41,6 @@ module.exports = function () {
   },
   function (req, accessToken, refreshToken, profile, done) {
 
-    var u = require('util');
-    logger.info('Facebook returned!!!');
-    logger.info('req: ' + u.inspect(req, true, null));
-    logger.info('accessToken: ' + u.inspect(accessToken, true, null));
-    logger.info('refreshToken: ' + u.inspect(refreshToken, true, null));
-    logger.info('profile: ' + u.inspect(profile , true, null));
-
     function createProviderAccount() {
       var account = new ProviderAccount();
       account.domain = authDomain;
@@ -66,7 +59,7 @@ module.exports = function () {
         // Not logged-in. Authenticate based on Facebook account.
         async.waterfall([
           function authenticateNotLoggedIn(callback) {
-            ProviderAccount.authenticate(authDomain, profile.id, this);
+            ProviderAccount.authenticate(authDomain, profile.id, callback);
           },
           function finish(user, callback) {
             if (!user)
