@@ -1,8 +1,9 @@
 
-var assert = require('assert')
-  , mongoose = require('mongoose')
-  , logger = require('winston')
-  , Account = require('../models/account');
+var assert = require('assert'),
+    mongoose = require('mongoose'),
+    logger = require('winston'),
+    Account = require('../models/account'),
+    ProviderAccount = require('../models/provider_account');
 
 
 function populateAccount(data) {
@@ -56,8 +57,11 @@ function populateDevelAccount() {
     }
   };
 
-  console.log('Droping Account schema...');
+  logger.info('Droping Account schema...');
   Account.collection.drop();
+
+  logger.info('Droping ProviderAccount schema...');
+  ProviderAccount.collection.drop();
 
   populateAccount(data);
 }
