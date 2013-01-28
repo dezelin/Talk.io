@@ -1,5 +1,7 @@
 var passport = require('passport'),
-    Account = require('../../app/models/account');
+    logger = require('winston'),
+    Account = require('../../app/models/account'),
+    ProviderAccount = require('../../app/models/provider_account');
 
 module.exports = function () {
     // Any files in this directory will be `require()`'ed when the application
@@ -15,15 +17,38 @@ module.exports = function () {
     // Passport session setup.
 
     passport.serializeUser(function (user, done) {
-        console.log('serializeUser');
-        done(null, user._id);
+        var tuple = { sessionId: user._id, provisioned: user.authDomain != null };
+        logger.info('Serializing session for user \'' + tuple.sessionId
+            + '\', provisioned = \'' + tuple.provisioned + '\'');
+        done(null, tuple);
     });
 
-    passport.deserializeUser(function (id, done) {
-        console.log('deserializeUser');
-        Account.findById(id, function (err, user) {
-            done(err, user);
-      });
+    passport.deserializeUser(function (sessionTuple, done) {
+        var tuple = sessionTuple || {};
+        var id = tuple.sessionId || null;
+        var provisioned = tuple.provisioned || null;
+        if (!id) {
+            logger.error('Missing session data.');
+            return done(null, false);
+        }
+
+        logger.info('Deserializing session for user \'' + id
+            + '\', provisioned = \'' + provisioned + '\'');
+        if (provisioned) {
+            ProviderAccount.findById(id, function (err, user) {
+                if (err)
+                    logger.error('Error: ' + err);
+
+                return done(err, { account: user, provisioned: provisioned });
+            });
+        } else {
+            Account.findById(id, function (err, user) {
+                if (err)
+                    logger.error('Error: ' + err);
+
+                return done(err, { account: user, provisioned: provisioned });
+            });
+        }
     });
 }
 

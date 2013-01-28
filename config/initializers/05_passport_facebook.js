@@ -43,7 +43,7 @@ module.exports = function () {
 
     function createProviderAccount() {
       var account = new ProviderAccount();
-      account.domain = authDomain;
+      account.authDomain = authDomain;
       account.uid = profile.id;
 
       var token = { kind: 'oauth', token: accessToken,
@@ -56,21 +56,38 @@ module.exports = function () {
     process.nextTick(function () {
 
       if (!req.user) {
+        logger.info('User not logged-in. Authenticate based on Facebook account.');
+
         // Not logged-in. Authenticate based on Facebook account.
         async.waterfall([
           function authenticateNotLoggedIn(callback) {
+            logger.info('Authenticating provider account: ' + profile.id);
             ProviderAccount.authenticate(authDomain, profile.id, callback);
           },
-          function finish(user, callback) {
-            if (!user)
-              return callback('No user.');
+          function returnAccountOrCreate(account, callback) {
+            if (account) {
+              logger.info('Provider account \'' + profile.id + '\' already exists.');
+              return done(null, account);
+            }
 
-            return callback(null, createProviderAccount());
+            account = createProviderAccount();
+            logger.info('Created new provider account \'' + account.uid + '\'');
+            account.save(callback);
+          },
+          function finish(account, callback) {
+            // Redirect to the show page
+            logger.info('Provider account has been saved. Redirecting user to the show page.');
+            return done(null, account);
           }
-        ], function(err, result) {
+        ],
+        function(err, result) {
+          logger.info('Error: ' + err);
           return done(err, result);
         });
       } else {
+
+        console.log('req.user not defined.');
+
         // Logged in. Associate Facebook account with user.  Preserve the login
         // state by supplying the existing user after association.
         var providerAccount;
@@ -99,7 +116,8 @@ module.exports = function () {
             user.providerAccounts.push(account);
             user.save(callback);
           }
-        ], function ignore(err, user) {
+        ],
+        function ignore(err, user) {
           // Ignore errors
           if (err)
             logger.error(err);
