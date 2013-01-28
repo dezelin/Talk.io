@@ -4,7 +4,7 @@ var assert = require('assert'),
 	StackType = require('../config/stack_type').Type;
 
 AUTH_DOMAIN = 'facebook.com';
-CALLBACK_PATHNAME = '/auth/facebook_callback';
+CALLBACK_PATHNAME = '/auth/facebook/callback';
 
 function FacebookAuthProvider() {
 	AuthProvider.call(this, { pathname: CALLBACK_PATHNAME });

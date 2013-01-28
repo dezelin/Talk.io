@@ -4,7 +4,7 @@ var assert = require('assert'),
 	StackType = require('../config/stack_type').Type;
 
 AUTH_DOMAIN = 'twitter.com';
-CALLBACK_PATHNAME = '/auth/twitter_callback';
+CALLBACK_PATHNAME = '/auth/twitter/callback';
 
 function TwitterAuthProvider() {
 	AuthProvider.call(this, { pathname: CALLBACK_PATHNAME });
