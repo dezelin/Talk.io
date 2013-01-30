@@ -19,4 +19,6 @@ module.exports = function routes() {
   self.match('auth/facebook/callback', 'auth#facebookCallback');
   self.match('auth/twitter', 'auth#twitter');
   self.match('auth/twitter/callback', 'auth#twitterCallback');
+  self.match('auth/google', 'auth#google');
+  self.match('auth/google/callback', 'auth#googleCallback');
 }

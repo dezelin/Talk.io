@@ -1,5 +1,6 @@
 var assert = require('assert'),
     nconf = require('nconf'),
+    GoogleStackInfoFactory = require('./config/google_info').Factory,
     TwitterStackInfoFactory = require('./config/twitter_info').Factory,
     FacebookStackInfoFactory = require('./config/facebook_info').Factory,
     ServerStackInfoFactory = require('./config/server_info').Factory,
@@ -7,6 +8,7 @@ var assert = require('assert'),
 
 
 function StackInfo () {
+  this.googleInfo = GoogleStackInfoFactory.create();
   this.twitterInfo = TwitterStackInfoFactory.create();
   this.facebookInfo = FacebookStackInfoFactory.create();
   this.serverInfo = ServerStackInfoFactory.create();
@@ -35,6 +37,14 @@ StackInfo.prototype.getServerHost = function () {
 
 StackInfo.prototype.getServerPort = function () {
   return this.serverInfo.getServerPort();
+}
+
+StackInfo.prototype.getGoogleClientId = function () {
+  return this.googleInfo.getClientId();
+}
+
+StackInfo.prototype.getGoogleClientSecret = function () {
+  return this.googleInfo.getClientSecret();
 }
 
 StackInfo.prototype.getFacebookAppId = function () {
